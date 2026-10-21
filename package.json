@@ -1,5 +1,6 @@
 {
   "name": "crack-stack",
+  "version": "0.0.0",
   "private": true,
   "type": "module",
   "engines": {
@@ -9,9 +10,13 @@
     "stack": "node scripts/stack.mjs",
     "check": "node scripts/check.mjs && tsc --noEmit && node --test scripts/*.test.mjs examples/architecture/src/task.test.ts",
     "example": "node examples/architecture/src/bootstrap.ts",
-    "create": "node scripts/create.mjs"
+    "create": "node scripts/create.mjs",
+    "changeset": "changeset",
+    "version-packages": "changeset version",
+    "release": "changeset publish"
   },
   "devDependencies": {
+    "@changesets/cli": "^3.0.3",
     "@types/node": "^24.0.0",
     "typescript": "^7.0.2"
   },
