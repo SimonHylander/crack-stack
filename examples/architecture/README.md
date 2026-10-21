@@ -5,9 +5,9 @@ This example creates a task and records a domain event. It combines the five arc
 Run these commands from the repository root:
 
 ```sh
-npm ci
-npm run check
-npm run example -- "Build my next app"
+pnpm install --frozen-lockfile
+pnpm run check
+pnpm run example "Build my next app"
 ```
 
 The example prints a successful task result and one `TaskCreated` event in the pending outbox. An empty title fails without writing either value.

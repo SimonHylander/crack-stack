@@ -15,7 +15,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
       const selection = JSON.parse(await readFile(args[0], 'utf8'));
       process.stdout.write(renderSelection(selection));
     } else {
-      throw new Error('Usage: npm run create, or node scripts/stack.mjs [stack.json | --list]');
+      throw new Error('Usage: pnpm run create, or node scripts/stack.mjs [stack.json | --list]');
     }
   } catch (error) {
     process.stderr.write(`${error.message}\n`);

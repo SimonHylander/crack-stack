@@ -1,6 +1,6 @@
 {
   "name": "svelte-postgres",
-  "packageManager": "npm",
+  "packageManager": "pnpm",
   "choices": [
     "hexagonal",
     "functional-core",

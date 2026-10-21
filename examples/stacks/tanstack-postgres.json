@@ -1,6 +1,6 @@
 {
   "name": "tanstack-postgres",
-  "packageManager": "npm",
+  "packageManager": "pnpm",
   "choices": [
     "monorepo",
     "hexagonal",
