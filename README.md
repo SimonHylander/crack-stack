@@ -4,10 +4,10 @@ Preferred technologies, setup skills, and architecture boilerplate for coding ag
 
 ## Create a project
 
-Install the CLI dependencies once with `pnpm install --frozen-lockfile`. Then run:
+With Node.js 24 or newer, run:
 
 ```sh
-pnpm run create
+npx crack-stack
 ```
 
 Choose a project directory, describe the application, and pick a preset or a custom stack. Choose Clerk, WorkOS AuthKit, or no auth. The CLI includes required technologies automatically and shows the final selection before creating the folder.
@@ -23,10 +23,10 @@ The agent uses the brief to scaffold the chosen frameworks and implement the app
 For a scripted setup, supply the same choices directly:
 
 ```sh
-pnpm run create my-app --recipe react-convex --description "A shared notes app"
+npx crack-stack my-app --recipe react-convex --description "A shared notes app"
 ```
 
-Run `pnpm run create --help` for the custom choice and package-manager options. `pnpm run stack` opens the same interactive flow. Existing selections can still be inspected with `node scripts/stack.mjs stack.json`.
+Run `npx crack-stack --help` for the custom choice and package-manager options. From a repository checkout, install dependencies with `pnpm install --frozen-lockfile` and use `pnpm run create`. Existing selections can still be inspected with `node scripts/stack.mjs stack.json`.
 
 ## Available choices
 
@@ -76,6 +76,10 @@ pnpm run example "Build my next app"
 
 Run `pnpm changeset` for a releasable change. Select `crack-stack`, choose a patch, minor, or major bump, and describe the change. Commit the generated `.changeset/*.md` file with your changes.
 
-On pushes to `main`, the release workflow checks the project and opens or updates a release PR with the version bump and `CHANGELOG.md`. Merge that PR to create a Git tag and GitHub release with the changelog entry. The package stays private and is not published to npm. The initial changeset releases version `0.1.0`.
+On pushes to `main`, the release workflow checks the project and opens or updates a release PR with the version bump and `CHANGELOG.md`. Merge that PR to publish to npm and create a Git tag and GitHub release. The initial patch changeset releases version `0.0.1`.
 
 The workflow uses the built-in GitHub token. In the repository's **Settings > Actions > General**, enable **Allow GitHub Actions to create and approve pull requests**. See the [Changesets automation guide](https://changesets.dev/guide/automating) for the action setup.
+
+For the first npm publication, check out the merged release commit with version `0.0.1`, run `npm login`, then run `pnpm run release`. This publishes the package under your npm account. Run `gh release create v0.0.1 --target main --notes-file CHANGELOG.md` to create its GitHub release. Generated applications remain private.
+
+After the first publication, configure an [npm trusted publisher](https://docs.npmjs.com/trusted-publishers/) for GitHub user `SimonHylander`, repository `crack-stack`, and workflow `release.yml`. Allow direct publishing with `npm publish`. Future releases use GitHub OIDC authentication without an npm token.

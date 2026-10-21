@@ -7,8 +7,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
-  pull-requests: write
+  contents: read
 
 concurrency:
   group: release-${{ github.ref }}
@@ -16,6 +15,10 @@ concurrency:
 jobs:
   release:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+      id-token: write
     steps:
       - uses: actions/checkout@v7.0.1
         with:
@@ -30,7 +33,7 @@ jobs:
           cache: true
       - run: pnpm install --frozen-lockfile
       - run: pnpm run check
-      - name: Create release PR or publish GitHub release
+      - name: Create release PR or publish to npm and GitHub
         uses: changesets/action@v2.1.2
         with:
           version-script: pnpm run version-packages

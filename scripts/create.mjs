@@ -1,6 +1,7 @@
+#!/usr/bin/env node
 import * as prompts from '@clack/prompts';
 import { readFile } from 'node:fs/promises';
-import { existsSync } from 'node:fs';
+import { existsSync, realpathSync } from 'node:fs';
 import { basename, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { parseArgs } from 'node:util';
@@ -15,9 +16,9 @@ const recipes = [
 const authProviders = Object.entries(catalog).filter(([, entry]) => entry.category === 'auth');
 const managers = ['pnpm', 'npm', 'yarn', 'bun'];
 const help = `Usage:
-  pnpm run create                        Choose a stack interactively
-  pnpm run create my-app                 Choose a stack for my-app
-  pnpm run create my-app --recipe react-convex --description "A shared notes app"
+  npx crack-stack                        Choose a stack interactively
+  npx crack-stack my-app                 Choose a stack for my-app
+  npx crack-stack my-app --recipe react-convex --description "A shared notes app"
 
 Options:
   --recipe <name>          tanstack-postgres, react-convex, svelte-postgres
@@ -144,7 +145,7 @@ export async function createCommand(args = []) {
   process.stdout.write(`Created ${result.directory}\nOpen it with your agent and say: Build from GENERATE.md\n`);
 }
 
-if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
+if (process.argv[1] && import.meta.url === pathToFileURL(realpathSync(process.argv[1])).href) {
   try {
     await createCommand(process.argv.slice(2));
   } catch (error) {

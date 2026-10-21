@@ -25,6 +25,10 @@ test('generates a standalone project with the request, chosen guides, and requir
     const manifest = JSON.parse(await readFile(join(target, 'package.json'), 'utf8'));
     const lock = await readFile(join(target, 'pnpm-lock.yaml'), 'utf8');
     assert.equal(manifest.name, 'notes');
+    assert.equal(manifest.private, true);
+    assert.equal(manifest.version, '0.0.0');
+    assert.equal(manifest.bin, undefined);
+    assert.equal(manifest.scripts.release, undefined);
     assert.match(lock, /^lockfileVersion: '9.0'/);
     await assert.rejects(access(join(target, 'package-lock.json')), { code: 'ENOENT' });
     const check = execFileSync(process.execPath, ['scripts/check.mjs'], { cwd: target, encoding: 'utf8' });
