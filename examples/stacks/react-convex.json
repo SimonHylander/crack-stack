@@ -1,0 +1,11 @@
+{
+  "name": "react-convex",
+  "packageManager": "npm",
+  "choices": [
+    "functional-core",
+    "react",
+    "convex",
+    "effect",
+    "confect"
+  ]
+}
