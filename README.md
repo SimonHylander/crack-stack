@@ -1,6 +1,6 @@
 # Crack stack
 
-Simon's preferred technologies, setup skills, and architecture boilerplate for coding agents. Pick a combination for each project. The template starts with no application dependencies selected.
+Preferred technologies, setup skills, and architecture boilerplate for coding agents. Pick a combination for each project. The template starts with no application dependencies selected.
 
 ## Start a project
 
@@ -34,10 +34,10 @@ The [recipes](examples/stacks) are example selections, not prebuilt integrations
 
 ## Use the skills elsewhere
 
-Install the skills into an existing project with the [skills CLI](https://github.com/vercel-labs/skills):
+From an existing project, install the skills from a local template checkout with the [skills CLI](https://github.com/vercel-labs/skills):
 
 ```sh
-npx skills add SimonHylander/crack-stack
+npx skills add /path/to/crack-stack
 ```
 
 The seven skills cover composition, repository layout, architecture, frontend, data, libraries, and infrastructure. When using the composition skill outside a template clone, also copy `catalog.json`, `stack.json`, and `scripts/stack.mjs` from this repository. The installation alone provides the category setup skills.

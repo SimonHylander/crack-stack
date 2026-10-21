@@ -1,6 +1,6 @@
 # Working with crack-stack
 
-This repository holds Simon's selectable stack preferences. `stack.json` records the choices for a project. An empty `choices` array means no technologies have been selected.
+This repository holds selectable stack preferences. `stack.json` records the choices for a project. An empty `choices` array means no technologies have been selected.
 
 For a new project or a stack change, read [the composition skill](skills/crack-stack/SKILL.md). Run `node scripts/stack.mjs stack.json` to validate the choices and find only their setup guides. `catalog.json` owns the available IDs and dependencies.
 

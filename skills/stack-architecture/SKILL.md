@@ -18,7 +18,7 @@ src/modules/<business-capability>/
 
 The framework entrypoint wires adapters to use cases. Keep domain decisions independent of frameworks and persistence. Start with files in one module, and introduce packages when a boundary needs them.
 
-For a concrete implementation, read the [runnable task example](../../examples/architecture/README.md). If it is absent from an installed skill bundle, use the [example in the source repository](https://github.com/SimonHylander/crack-stack/tree/main/examples/architecture).
+For a concrete implementation, read the [runnable task example](../../examples/architecture/README.md). If it is absent from an installed skill bundle, get `examples/architecture/` from a checkout of this template.
 
 ## Hexagonal architecture
 

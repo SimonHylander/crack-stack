@@ -7,7 +7,7 @@ description: Select or change a crack-stack combination and bootstrap its applic
 
 Use `stack.json` as the project's selection. `catalog.json` defines the available IDs and dependencies.
 
-If this skill was installed without the template files, get `catalog.json`, `stack.json`, and `scripts/stack.mjs` from the [source repository](https://github.com/SimonHylander/crack-stack). Resolve printed guide paths from the template root, or find the corresponding recipe in the installed skills.
+If this skill was installed without the template files, get `catalog.json`, `stack.json`, and `scripts/stack.mjs` from a checkout of this template. Resolve printed guide paths from the template root, or find the corresponding recipe in the installed skills.
 
 ## Confirm the selection
 
