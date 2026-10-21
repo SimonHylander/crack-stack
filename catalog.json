@@ -1,0 +1,151 @@
+{
+  "monorepo": {
+    "name": "Monorepo with Turborepo",
+    "category": "repository",
+    "guide": "skills/stack-repositories/references/monorepo.md",
+    "requires": []
+  },
+  "polyrepo": {
+    "name": "Polyrepo",
+    "category": "repository",
+    "guide": "skills/stack-repositories/references/polyrepo.md",
+    "requires": []
+  },
+  "hexagonal": {
+    "name": "Hexagonal architecture",
+    "category": "architecture",
+    "guide": "skills/stack-architecture/SKILL.md#hexagonal-architecture",
+    "requires": []
+  },
+  "clean": {
+    "name": "Clean architecture",
+    "category": "architecture",
+    "guide": "skills/stack-architecture/SKILL.md#clean-architecture",
+    "requires": []
+  },
+  "event-driven": {
+    "name": "Event-driven architecture",
+    "category": "architecture",
+    "guide": "skills/stack-architecture/SKILL.md#event-driven-architecture",
+    "requires": []
+  },
+  "ddd": {
+    "name": "Domain-driven design",
+    "category": "architecture",
+    "guide": "skills/stack-architecture/SKILL.md#domain-driven-design",
+    "requires": []
+  },
+  "functional-core": {
+    "name": "Functional core, imperative shell",
+    "category": "architecture",
+    "guide": "skills/stack-architecture/SKILL.md#functional-core-imperative-shell",
+    "requires": []
+  },
+  "tanstack-start": {
+    "name": "TanStack Start",
+    "category": "frontend",
+    "guide": "skills/stack-frontend/references/tanstack-start.md",
+    "requires": []
+  },
+  "nextjs": {
+    "name": "Next.js",
+    "category": "frontend",
+    "guide": "skills/stack-frontend/references/nextjs.md",
+    "requires": []
+  },
+  "react": {
+    "name": "React",
+    "category": "frontend",
+    "guide": "skills/stack-frontend/references/react.md",
+    "requires": []
+  },
+  "svelte": {
+    "name": "Svelte",
+    "category": "frontend",
+    "guide": "skills/stack-frontend/references/svelte.md",
+    "requires": []
+  },
+  "postgres": {
+    "name": "PostgreSQL",
+    "category": "database",
+    "guide": "skills/stack-databases/references/postgres.md",
+    "requires": []
+  },
+  "convex": {
+    "name": "Convex",
+    "category": "database",
+    "guide": "skills/stack-databases/references/convex.md",
+    "requires": []
+  },
+  "neo4j": {
+    "name": "Neo4j",
+    "category": "database",
+    "guide": "skills/stack-databases/references/neo4j.md",
+    "requires": []
+  },
+  "pinecone": {
+    "name": "Pinecone",
+    "category": "database",
+    "guide": "skills/stack-databases/references/pinecone.md",
+    "requires": []
+  },
+  "drizzle": {
+    "name": "Drizzle ORM",
+    "category": "orm",
+    "guide": "skills/stack-databases/references/drizzle.md",
+    "requires": [
+      "postgres"
+    ]
+  },
+  "tanstack": {
+    "name": "TanStack libraries",
+    "category": "library",
+    "guide": "skills/stack-libraries/references/tanstack.md",
+    "requires": []
+  },
+  "effect": {
+    "name": "Effect",
+    "category": "library",
+    "guide": "skills/stack-libraries/references/effect.md",
+    "requires": []
+  },
+  "confect": {
+    "name": "Confect",
+    "category": "library",
+    "guide": "skills/stack-libraries/references/confect.md",
+    "requires": [
+      "effect",
+      "convex"
+    ]
+  },
+  "terraform": {
+    "name": "Terraform",
+    "category": "infrastructure",
+    "guide": "skills/stack-infrastructure/references/terraform.md",
+    "requires": []
+  },
+  "pulumi": {
+    "name": "Pulumi",
+    "category": "infrastructure",
+    "guide": "skills/stack-infrastructure/references/pulumi.md",
+    "requires": []
+  },
+  "sst": {
+    "name": "SST",
+    "category": "infrastructure",
+    "guide": "skills/stack-infrastructure/references/sst.md",
+    "requires": []
+  },
+  "clerk": {
+    "name": "Clerk",
+    "category": "auth",
+    "guide": "skills/stack-auth/references/clerk.md",
+    "requires": []
+  },
+  "workos": {
+    "name": "WorkOS AuthKit",
+    "category": "auth",
+    "guide": "skills/stack-auth/references/workos.md",
+    "requires": []
+  }
+}

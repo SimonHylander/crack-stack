@@ -1,0 +1,18 @@
+---
+name: stack-infrastructure
+description: Set up Terraform, Pulumi, or SST. Use when initializing infrastructure or preparing a deployment for the selected stack.
+---
+
+# Set up infrastructure
+
+Read the recipe for the selected tool:
+
+- For `terraform`, read [Terraform setup](references/terraform.md).
+- For `pulumi`, read [Pulumi setup](references/pulumi.md).
+- For `sst`, read [SST setup](references/sst.md).
+
+Assign one tool and repository to each managed resource. Before provisioning, record the provider, region, environment, and state backend. Keep development and production state separate.
+
+Put infrastructure under `infra/` unless the tool requires a root configuration. Run deployments within the task's authorized scope. A setup or planning request alone does not authorize cloud deployment.
+
+Report local validation, preview, and deployment results separately. State which stages could not run and why.

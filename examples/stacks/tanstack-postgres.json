@@ -1,0 +1,18 @@
+{
+  "name": "tanstack-postgres",
+  "packageManager": "npm",
+  "choices": [
+    "monorepo",
+    "hexagonal",
+    "clean",
+    "ddd",
+    "functional-core",
+    "event-driven",
+    "tanstack-start",
+    "postgres",
+    "drizzle",
+    "effect",
+    "tanstack",
+    "sst"
+  ]
+}

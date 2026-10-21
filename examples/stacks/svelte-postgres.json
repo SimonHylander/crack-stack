@@ -1,0 +1,13 @@
+{
+  "name": "svelte-postgres",
+  "packageManager": "npm",
+  "choices": [
+    "hexagonal",
+    "functional-core",
+    "svelte",
+    "postgres",
+    "drizzle",
+    "tanstack",
+    "pulumi"
+  ]
+}
