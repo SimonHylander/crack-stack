@@ -71,3 +71,11 @@ pnpm run example "Build my next app"
 ```
 
 `pnpm run check` validates local guide links, the example stack selections, TypeScript, and behavior tests. It does not provision or test hosted databases and infrastructure.
+
+## Release a version
+
+Run `pnpm changeset` for a releasable change. Select `crack-stack`, choose a patch, minor, or major bump, and describe the change. Commit the generated `.changeset/*.md` file with your changes.
+
+On pushes to `main`, the release workflow checks the project and opens or updates a release PR with the version bump and `CHANGELOG.md`. Merge that PR to create a Git tag and GitHub release with the changelog entry. The package stays private and is not published to npm. The initial changeset releases version `0.1.0`.
+
+The workflow uses the built-in GitHub token. In the repository's **Settings > Actions > General**, enable **Allow GitHub Actions to create and approve pull requests**. See the [Changesets automation guide](https://changesets.dev/guide/automating) for the action setup.
