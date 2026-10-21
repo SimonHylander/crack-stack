@@ -10,7 +10,7 @@ Install the CLI dependencies once with `npm ci`. Then run:
 npm run create
 ```
 
-Choose a project directory, describe the application, and pick a preset or a custom stack. The CLI includes required technologies automatically and shows the final selection before creating the folder.
+Choose a project directory, describe the application, and pick a preset or a custom stack. Choose Clerk, WorkOS AuthKit, or no auth. The CLI includes required technologies automatically and shows the final selection before creating the folder.
 
 The generated project contains `stack.json`, the setup skills, and a `GENERATE.md` brief with your requirements and selected recipes. Open that folder with your coding agent and say:
 
@@ -33,6 +33,7 @@ Run `npm run create -- --help` for the custom choice and package-manager options
 - **R1 Repository:** Monorepo with Turborepo, or polyrepo with independent component repositories.
 - **A1 Architecture:** Hexagonal, Clean, Event-driven, Domain-driven design, Functional core with an imperative shell.
 - **D1 Data:** PostgreSQL, Convex, Neo4j, Pinecone, and Drizzle ORM for PostgreSQL.
+- **AU1 Authentication:** Clerk or WorkOS AuthKit.
 - **I1 Infrastructure:** Terraform, Pulumi, or SST.
 - **L1 Libraries:** [TanStack](https://tanstack.com/), [Effect v4](https://effect.website/docs/v4/onboarding), and [Confect](https://confect.dev/getting-started/introduction).
 - **F1 Frontend:** TanStack Start, Next.js, React with Vite, or Svelte. The Svelte recipe offers SvelteKit for full-stack apps and Vite for a standalone UI.
@@ -49,7 +50,7 @@ From an existing project, install the skills from a local template checkout with
 npx skills add /path/to/crack-stack
 ```
 
-The seven skills cover composition, repository layout, architecture, frontend, data, libraries, and infrastructure. For an existing application, use a template checkout to run the selection CLI against the application's `stack.json`.
+The skills cover composition, repository layout, architecture, frontend, data, libraries, authentication, and infrastructure. For an existing application, use a template checkout to run the selection CLI against the application's `stack.json`.
 
 For Effect, also install the [upstream skill](https://github.com/Effect-TS/skills/blob/main/skills/effect-ts/SKILL.md):
 

@@ -45,6 +45,8 @@ test('creates a preset project and rejects incomplete or conflicting requests be
     const selection = JSON.parse(await readFile(join(target, 'stack.json'), 'utf8'));
     assert.deepEqual(selection.choices, ['polyrepo', 'functional-core', 'react', 'convex', 'effect', 'confect']);
     for (const args of [
+      ['--choices', 'clerk,workos', '--description', 'Conflicting auth providers'],
+      ['--recipe', 'react-convex', '--auth', 'unknown', '--description', 'Unknown auth'],
       ['--choices', 'react,nextjs', '--description', 'Conflicting frontends'],
       ['--choices', 'react'],
       ['--choices', 'unknown', '--description', 'Unknown technology'],
@@ -67,3 +69,27 @@ test('a noninteractive invocation explains how to create a project without hangi
   assert.ok(result.stderr.includes('Interactive setup needs a terminal'));
   assert.ok(result.stderr.includes('--recipe react-convex --description'));
 });
+
+for (const [provider, label] of [['clerk', 'Clerk'], ['workos', 'WorkOS AuthKit'], ['none', null]]) {
+  test(`generates a preset with auth provider ${provider}`, async () => {
+    const temporary = await mkdtemp(join(tmpdir(), 'crack-stack-auth-'));
+    try {
+      const target = join(temporary, 'notes');
+      execFileSync(process.execPath, [cli, target, '--recipe', 'react-convex', '--auth', provider, '--description', 'Authenticated notes']);
+      const selection = JSON.parse(await readFile(join(target, 'stack.json'), 'utf8'));
+      assert.deepEqual(selection.choices, [
+        'polyrepo', 'functional-core', 'react', 'convex', 'effect', 'confect',
+        ...(provider === 'none' ? [] : [provider]),
+      ]);
+      const brief = await readFile(join(target, 'GENERATE.md'), 'utf8');
+      if (label) {
+        assert.ok(brief.includes(`${label} [auth]: skills/stack-auth/references/${provider}.md`));
+        await access(join(target, `skills/stack-auth/references/${provider}.md`));
+      } else {
+        assert.ok(!brief.includes('[auth]'));
+      }
+    } finally {
+      await rm(temporary, { recursive: true, force: true });
+    }
+  });
+}

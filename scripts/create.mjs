@@ -12,6 +12,7 @@ const recipes = [
   { value: 'react-convex', label: 'React + Convex + Confect', hint: 'Polyrepo, Effect' },
   { value: 'svelte-postgres', label: 'Svelte + PostgreSQL', hint: 'Drizzle, TanStack, Pulumi' },
 ];
+const authProviders = Object.entries(catalog).filter(([, entry]) => entry.category === 'auth');
 const managers = ['npm', 'pnpm', 'yarn', 'bun'];
 const help = `Usage:
   npm run create                         Choose a stack interactively
@@ -21,6 +22,7 @@ const help = `Usage:
 Options:
   --recipe <name>          tanstack-postgres, react-convex, svelte-postgres
   --choices <ids>          Comma-separated technology IDs instead of a recipe
+  --auth <id>             clerk, workos, none (overrides auth in --choices)
   --description <text>    What the application should do
   --package-manager <id>  npm, pnpm, yarn, bun (default: npm)
   --help                  Show this help
@@ -51,9 +53,18 @@ function selectionError(choices) {
   }
 }
 
+function withAuth(choices, provider) {
+  if (provider !== 'none' && catalog[provider]?.category !== 'auth') {
+    throw new Error('auth must be clerk, workos, or none.');
+  }
+  const selected = choices.filter(id => catalog[id]?.category !== 'auth');
+  return provider === 'none' ? selected : [...selected, provider];
+}
+
 async function chooseTechnologies() {
   const options = {};
   for (const [value, entry] of Object.entries(catalog)) {
+    if (entry.category === 'auth') continue;
     (options[entry.category] ??= []).push({ value, label: entry.name });
   }
   let initialValues = [];
@@ -88,10 +99,17 @@ async function wizard(directory) {
   const choices = recipe === 'custom'
     ? await chooseTechnologies()
     : (await loadRecipe(recipe)).choices;
+  const auth = await answer(prompts.select({
+    message: 'Auth provider',
+    options: [
+      { value: 'none', label: 'None' },
+      ...authProviders.map(([value, entry]) => ({ value, label: entry.name })),
+    ],
+  }));
   const packageManager = await answer(prompts.select({
     message: 'Package manager', options: managers.map(value => ({ value, label: value })),
   }));
-  const selection = resolveSelection({ name: basename(resolve(destination)), packageManager, description, choices });
+  const selection = resolveSelection({ name: basename(resolve(destination)), packageManager, description, choices: withAuth(choices, auth) });
   prompts.note(selection.choices.map(id => catalog[id].name).join('\n'), 'Your stack');
   const confirmed = await answer(prompts.confirm({ message: `Create ${destination}?` }));
   if (!confirmed) throw new Error('Creation cancelled. No project was written.');
@@ -103,7 +121,7 @@ export async function createCommand(args = []) {
   const { values, positionals } = parseArgs({
     args, allowPositionals: true,
     options: {
-      recipe: { type: 'string' }, choices: { type: 'string' }, description: { type: 'string' },
+      recipe: { type: 'string' }, choices: { type: 'string' }, auth: { type: 'string' }, description: { type: 'string' },
       'package-manager': { type: 'string' }, help: { type: 'boolean' },
     },
   });
@@ -120,7 +138,7 @@ export async function createCommand(args = []) {
     directory: positionals[0],
     selection: {
       name: basename(resolve(positionals[0])), packageManager: values['package-manager'] ?? 'npm',
-      description: values.description ?? '', choices,
+      description: values.description ?? '', choices: values.auth === undefined ? choices : withAuth(choices, values.auth),
     },
   });
   process.stdout.write(`Created ${result.directory}\nOpen it with your agent and say: Build from GENERATE.md\n`);

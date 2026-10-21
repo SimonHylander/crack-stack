@@ -135,5 +135,17 @@
     "category": "infrastructure",
     "guide": "skills/stack-infrastructure/references/sst.md",
     "requires": []
+  },
+  "clerk": {
+    "name": "Clerk",
+    "category": "auth",
+    "guide": "skills/stack-auth/references/clerk.md",
+    "requires": []
+  },
+  "workos": {
+    "name": "WorkOS AuthKit",
+    "category": "auth",
+    "guide": "skills/stack-auth/references/workos.md",
+    "requires": []
   }
 }

@@ -23,7 +23,7 @@ export function validateSelection(selection) {
   if (new Set(selection.choices).size !== selection.choices.length) {
     throw new Error('choices must not contain duplicate IDs.');
   }
-  for (const category of ['repository', 'frontend', 'infrastructure', 'orm']) {
+  for (const category of ['repository', 'frontend', 'infrastructure', 'orm', 'auth']) {
     const selected = selection.choices.filter(id => catalog[id].category === category);
     if (selected.length > 1) throw new Error(`Choose at most one ${category}: ${selected.join(', ')}.`);
   }

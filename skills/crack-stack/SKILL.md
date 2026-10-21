@@ -26,6 +26,7 @@ Use the CLI's guide paths to select the relevant skill. Read its entrypoint and 
 - For a frontend, read [frontend setup](../stack-frontend/SKILL.md).
 - For storage or Drizzle, read [database setup](../stack-databases/SKILL.md).
 - For Effect, Confect, or TanStack, read [library setup](../stack-libraries/SKILL.md).
+- For Clerk or WorkOS, read [authentication setup](../stack-auth/SKILL.md).
 - For infrastructure, read [infrastructure setup](../stack-infrastructure/SKILL.md).
 
 Before installation, read each recipe's official setup source. Check runtime requirements, release channels, and peer dependencies against the versions you will install.
@@ -35,7 +36,7 @@ Before installation, read each recipe's official setup source. Check runtime req
 1. Choose the package manager. For a new project, use `packageManager` from `stack.json`. For an existing application, preserve its lockfile's manager and update the selection to match.
 2. Apply the selected repository layout. For a new application, scaffold into a temporary directory, then inspect and merge the result. For an existing application, integrate into its current files. Preserve project instructions, selections, and unrelated work.
 3. Apply the selected architecture inside the framework's file conventions. Install runtime dependencies in the packages that import them.
-4. Integrate the selected libraries and stores. Add infrastructure only when selected. Follow each recipe's verification steps as its integration becomes runnable.
+4. Integrate the selected libraries, stores, and auth provider. Add infrastructure only when selected. Follow each recipe's verification steps as its integration becomes runnable.
 
 Replace template tooling with application tooling where needed, including the lockfile if the package manager changes. Keep the setup skills available for later work.
 
