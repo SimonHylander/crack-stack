@@ -2,6 +2,7 @@
   "name": "react-convex",
   "packageManager": "npm",
   "choices": [
+    "polyrepo",
     "functional-core",
     "react",
     "convex",

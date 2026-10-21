@@ -21,13 +21,14 @@ The agent scaffolds the chosen framework in a temporary directory, merges its fi
 
 ## Available choices
 
+- **R1 Repository:** Monorepo with Turborepo, or polyrepo with independent component repositories.
 - **A1 Architecture:** Hexagonal, Clean, Event-driven, Domain-driven design, Functional core with an imperative shell.
 - **D1 Data:** PostgreSQL, Convex, Neo4j, Pinecone, and Drizzle ORM for PostgreSQL.
 - **I1 Infrastructure:** Terraform, Pulumi, or SST.
 - **L1 Libraries:** [TanStack](https://tanstack.com/), [Effect v4](https://effect.website/docs/v4/onboarding), and [Confect](https://confect.dev/getting-started/introduction).
 - **F1 Frontend:** TanStack Start, Next.js, React with Vite, or Svelte. The Svelte recipe offers SvelteKit for full-stack apps and Vite for a standalone UI.
 
-Use one frontend recipe per app. TanStack Start and Next.js already include React. Architecture patterns can be combined in one module layout. Multiple databases need explicit responsibilities. Drizzle targets PostgreSQL in this catalog. Confect requires both Effect and Convex. Use one infrastructure tool per resource owner.
+Select at most one repository layout. Add `monorepo` or `polyrepo` to `choices`. With neither selected, keep the current layout. Use one frontend recipe per app. TanStack Start and Next.js already include React. Architecture patterns can be combined in one module layout. Multiple databases need explicit responsibilities. Drizzle targets PostgreSQL in this catalog. Confect requires both Effect and Convex. Use one infrastructure tool per resource owner.
 
 The [recipes](examples/stacks) are example selections, not prebuilt integrations or a guarantee that every combination works on every deployment target. Each setup guide states its integration constraints and a completion check.
 
@@ -39,7 +40,7 @@ Install the skills into an existing project with the [skills CLI](https://github
 npx skills add SimonHylander/crack-stack
 ```
 
-The six skills cover composition, architecture, frontend, data, libraries, and infrastructure. When using the composition skill outside a template clone, also copy `catalog.json`, `stack.json`, and `scripts/stack.mjs` from this repository. The installation alone provides the category setup skills.
+The seven skills cover composition, repository layout, architecture, frontend, data, libraries, and infrastructure. When using the composition skill outside a template clone, also copy `catalog.json`, `stack.json`, and `scripts/stack.mjs` from this repository. The installation alone provides the category setup skills.
 
 For Effect, also install the [upstream skill](https://github.com/Effect-TS/skills/blob/main/skills/effect-ts/SKILL.md):
 

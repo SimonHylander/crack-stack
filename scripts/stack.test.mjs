@@ -32,6 +32,7 @@ Read each selected guide and its official sources before installation.
 test('rejects invalid selections without producing setup instructions', async () => {
   const directory = await mkdtemp(join(tmpdir(), 'crack-stack-'));
   const cases = [
+    { choices: ['monorepo', 'polyrepo'], message: 'Choose at most one repository: monorepo, polyrepo.' },
     { choices: ['confect'], message: 'confect requires: effect, convex.' },
     { choices: ['drizzle'], message: 'drizzle requires: postgres.' },
     { choices: ['nextjs', 'react'], message: 'Choose at most one frontend: nextjs, react.' },

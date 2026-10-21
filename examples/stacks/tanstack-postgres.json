@@ -2,6 +2,7 @@
   "name": "tanstack-postgres",
   "packageManager": "npm",
   "choices": [
+    "monorepo",
     "hexagonal",
     "clean",
     "ddd",

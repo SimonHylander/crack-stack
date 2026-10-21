@@ -1,4 +1,16 @@
 {
+  "monorepo": {
+    "name": "Monorepo with Turborepo",
+    "category": "repository",
+    "guide": "skills/stack-repositories/references/monorepo.md",
+    "requires": []
+  },
+  "polyrepo": {
+    "name": "Polyrepo",
+    "category": "repository",
+    "guide": "skills/stack-repositories/references/polyrepo.md",
+    "requires": []
+  },
   "hexagonal": {
     "name": "Hexagonal architecture",
     "category": "architecture",
