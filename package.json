@@ -1,7 +1,26 @@
 {
   "name": "crack-stack",
   "version": "0.0.0",
-  "private": true,
+  "description": "Choose a technology stack and generate setup skills and an application brief.",
+  "bin": {
+    "crack-stack": "scripts/create.mjs"
+  },
+  "files": [
+    "scripts/",
+    "skills/",
+    "examples/",
+    ".npm-template/",
+    "catalog.json",
+    "stack.json",
+    "tsconfig.json"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SimonHylander/crack-stack.git"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
   "type": "module",
   "engines": {
     "node": ">=24"
@@ -13,7 +32,8 @@
     "create": "node scripts/create.mjs",
     "changeset": "changeset",
     "version-packages": "changeset version",
-    "release": "changeset publish"
+    "release": "changeset publish",
+    "prepack": "node scripts/prepare-package.mjs"
   },
   "devDependencies": {
     "@changesets/cli": "^3.0.3",

@@ -1,5 +1,5 @@
 ---
-"crack-stack": minor
+"crack-stack": patch
 ---
 
-Release the stack selection CLI, setup skills, and architecture example with versioned GitHub releases.
+Publish the crack-stack CLI, setup skills, and architecture example to npm.
