@@ -5,13 +5,13 @@ description: Select or change a crack-stack combination and bootstrap its applic
 
 # Compose a stack
 
-Use `stack.json` as the project's selection. `catalog.json` defines the available IDs and dependencies.
+If `GENERATE.md` exists, read it for the agreed application requirements and stack. Use `stack.json` as the project's selection. `catalog.json` defines the available IDs and dependencies.
 
-If this skill was installed without the template files, get `catalog.json`, `stack.json`, and `scripts/stack.mjs` from a checkout of this template. Resolve printed guide paths from the template root, or find the corresponding recipe in the installed skills.
+If this skill was installed without the template tooling, use a template checkout for CLI commands. For validation, pass the absolute path to the application's `stack.json`. Resolve printed guide paths from the template root, or find the corresponding recipe in the installed skills.
 
 ## Confirm the selection
 
-1. Read the requested application and `stack.json`. Run `node scripts/stack.mjs --list` to find available choices.
+1. Read the requested application and `stack.json`. Use `node scripts/stack.mjs --list` to find available choices. The user-facing setup wizard is `npm run create`.
 2. Record the requested choices. Leave unused categories empty. Ask about an unresolved choice only when it changes product behavior or deployment requirements.
 3. Run `node scripts/stack.mjs stack.json`. Resolve every validation error before installing dependencies.
 

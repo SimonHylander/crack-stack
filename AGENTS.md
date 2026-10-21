@@ -2,7 +2,9 @@
 
 This repository holds selectable stack preferences. `stack.json` records the choices for a project. An empty `choices` array means no technologies have been selected.
 
-For a new project or a stack change, read [the composition skill](skills/crack-stack/SKILL.md). Run `node scripts/stack.mjs stack.json` to validate the choices and find only their setup guides. `catalog.json` owns the available IDs and dependencies.
+For a new project, run `npm run create` to choose the stack and generate a project folder. The generated `GENERATE.md` records the application requirements and selected recipes.
+
+For a stack change, read [the composition skill](skills/crack-stack/SKILL.md). Run `node scripts/stack.mjs stack.json` to validate the choices and find only their setup guides. `catalog.json` owns the available IDs and dependencies.
 
 Before installing a selected technology, read its guide and linked official setup documentation. Verify the current package versions and peer dependencies. Preserve the project's package manager and framework conventions.
 

@@ -1,7 +1,7 @@
 import { readFile, readdir, access } from 'node:fs/promises';
 import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { catalog, validateSelection } from './stack.mjs';
+import { catalog, validateSelection } from './selection.mjs';
 
 const root = fileURLToPath(new URL('..', import.meta.url));
 

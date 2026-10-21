@@ -2,14 +2,20 @@
   "name": "crack-stack",
   "private": true,
   "type": "module",
-  "engines": { "node": ">=24" },
+  "engines": {
+    "node": ">=24"
+  },
   "scripts": {
     "stack": "node scripts/stack.mjs",
-    "check": "node scripts/check.mjs && tsc --noEmit && node --test scripts/stack.test.mjs examples/architecture/src/task.test.ts",
-    "example": "node examples/architecture/src/bootstrap.ts"
+    "check": "node scripts/check.mjs && tsc --noEmit && node --test scripts/*.test.mjs examples/architecture/src/task.test.ts",
+    "example": "node examples/architecture/src/bootstrap.ts",
+    "create": "node scripts/create.mjs"
   },
   "devDependencies": {
     "@types/node": "^24.0.0",
     "typescript": "^7.0.2"
+  },
+  "dependencies": {
+    "@clack/prompts": "^1.8.1"
   }
 }

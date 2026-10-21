@@ -2,22 +2,31 @@
 
 Preferred technologies, setup skills, and architecture boilerplate for coding agents. Pick a combination for each project. The template starts with no application dependencies selected.
 
-## Start a project
+## Create a project
 
-1. Create a repository from this template, or clone it.
-2. Edit `stack.json`. Use IDs from `node scripts/stack.mjs --list`, or copy a recipe from [examples/stacks](examples/stacks).
-3. Run `node scripts/stack.mjs stack.json` with Node.js 24 or later. The command validates the selection and prints the relevant guide paths. It does not install packages or provision services.
-4. Give your agent this instruction:
+Install the CLI dependencies once with `npm ci`. Then run:
 
-```text
-Read AGENTS.md and skills/crack-stack/SKILL.md. Build the application described
-below using stack.json. Read only the selected technology guides and their
-official sources. Implement one working feature through the selected layers.
-
-Application: <describe what you want to build>
+```sh
+npm run create
 ```
 
-The agent scaffolds the chosen framework in a temporary directory, merges its files into the project, and replaces this template's development scripts with application scripts as needed. It keeps the skills and stack selection available for later work.
+Choose a project directory, describe the application, and pick a preset or a custom stack. The CLI includes required technologies automatically and shows the final selection before creating the folder.
+
+The generated project contains `stack.json`, the setup skills, and a `GENERATE.md` brief with your requirements and selected recipes. Open that folder with your coding agent and say:
+
+```text
+Build from GENERATE.md.
+```
+
+The agent uses the brief to scaffold the chosen frameworks and implement the application. The CLI prepares the template and instructions. It leaves package installation and cloud provisioning to the implementation step.
+
+For a scripted setup, supply the same choices directly:
+
+```sh
+npm run create -- my-app --recipe react-convex --description "A shared notes app"
+```
+
+Run `npm run create -- --help` for the custom choice and package-manager options. `npm run stack` opens the same interactive flow. Existing selections can still be inspected with `node scripts/stack.mjs stack.json`.
 
 ## Available choices
 
@@ -40,7 +49,7 @@ From an existing project, install the skills from a local template checkout with
 npx skills add /path/to/crack-stack
 ```
 
-The seven skills cover composition, repository layout, architecture, frontend, data, libraries, and infrastructure. When using the composition skill outside a template clone, also copy `catalog.json`, `stack.json`, and `scripts/stack.mjs` from this repository. The installation alone provides the category setup skills.
+The seven skills cover composition, repository layout, architecture, frontend, data, libraries, and infrastructure. For an existing application, use a template checkout to run the selection CLI against the application's `stack.json`.
 
 For Effect, also install the [upstream skill](https://github.com/Effect-TS/skills/blob/main/skills/effect-ts/SKILL.md):
 
