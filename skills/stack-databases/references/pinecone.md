@@ -1,9 +1,15 @@
 # Set up Pinecone
 
-Read the [official Node.js SDK guide](https://docs.pinecone.io/reference/sdks/node/overview). Install `@pinecone-database/pinecone` in the server package. Check the current SDK runtime requirements and API version.
+Read the [official Node.js SDK guide](https://docs.pinecone.io/reference/sdks/node/overview). Check the current runtime requirements and SDK API version.
 
-Configure server-only `PINECONE_API_KEY` and an index host or name. Define the embedding model, dimension, similarity metric, and namespace strategy before creating an index. Match SDK calls to the installed SDK version.
+## Configure the index and client
 
-Record which store owns source documents. Use stable vector IDs so retried upserts replace the same record. Define update, delete, and rebuild behavior for the vector projection. Query only the authorized namespace and metadata scope. Account for index readiness and eventual consistency in verification.
+Install `@pinecone-database/pinecone` in the server package. Configure a server-only `PINECONE_API_KEY` and the index host or name.
 
-Complete when a known document is indexed and a query returns that document, then verify that deletion removes it from results. Run this against a development index through the real server adapter.
+Before creating an index, define the embedding model, dimension, similarity metric, and namespace strategy. Use the installed SDK's API.
+
+Record which store owns source documents. Use stable vector IDs for retried upserts. Define update, deletion, and rebuild behavior for the index. Scope queries to authorized namespaces and metadata.
+
+## Verify
+
+Through the server adapter, index a known document and confirm a query returns it. Delete the document and confirm it disappears from results. Account for index readiness and eventual consistency when checking results.

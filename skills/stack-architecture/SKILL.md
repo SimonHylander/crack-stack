@@ -1,67 +1,69 @@
 ---
 name: stack-architecture
-description: Structure application modules using Hexagonal, Clean, Event-driven, Domain-driven design, or Functional core with an imperative shell. Use for crack-stack architecture selection and implementation.
+description: Structure business modules using Hexagonal, Clean, Event-driven, Domain-driven design, or Functional core with an imperative shell. Use when applying these patterns to application code.
 ---
 
-# Structure the selected architecture
+# Structure business modules
 
-Read the selected patterns in `stack.json`. Combine them in one layout, and create directories only when they contain working code. The [runnable task example](../../examples/architecture/README.md) demonstrates the shared structure. In an installed skills bundle, fetch the example from the [source repository](https://github.com/SimonHylander/crack-stack/tree/main/examples/architecture) if it is absent.
+Read the patterns selected in `stack.json` and apply only their sections below. Combine selected patterns in one module structure. Create directories when they contain working code.
 
-For each business module, use the following ownership:
+For Hexagonal or Clean architecture, use this layout inside each business capability:
 
 ```text
 src/modules/<business-capability>/
-  domain/          Values, states, decisions, domain events
-  application/     Use cases and ports required by those use cases
-  adapters/        Persistence, network clients, transport mapping
+	domain/       Values, states, decisions, domain events
+	application/  Use cases and the ports they require
+	adapters/     Persistence, network clients, transport mapping
 ```
 
-The framework entrypoint or a dedicated composition module wires concrete adapters to use cases. `domain` imports no application, framework, database, or infrastructure modules. `application` imports the domain and declares the interfaces it needs. Adapters depend on those interfaces. Start with files in a single module and introduce packages only when a real boundary needs them.
+The framework entrypoint wires adapters to use cases. Keep domain decisions independent of frameworks and persistence. Start with files in one module, and introduce packages when a boundary needs them.
+
+For a concrete implementation, read the [runnable task example](../../examples/architecture/README.md). If it is absent from an installed skill bundle, use the [example in the source repository](https://github.com/SimonHylander/crack-stack/tree/main/examples/architecture).
 
 ## Hexagonal architecture
 
-Declare ports around required capabilities, such as `TaskStore.createWithEvents`. Implement persistence and external APIs as adapters. HTTP handlers, CLI commands, and queue consumers call the same use case. Pass dependencies as function arguments. When Effect is selected, services and layers can implement this wiring.
+Declare ports for capabilities the use case needs, such as `TaskStore.createWithEvents`. Implement them in adapters. Call the same use case from HTTP handlers, CLI commands, or queue consumers. Pass dependencies as arguments, or use services and layers when Effect is selected.
 
-Verify the use case through an in-memory adapter without starting a framework or database. Separately verify each real adapter against its service.
+Verify the use case with an in-memory adapter. Verify each real adapter against its service.
 
 Source: [Alistair Cockburn's original article](https://alistair.cockburn.us/hexagonal-architecture).
 
 ## Clean architecture
 
-Keep dependency direction toward domain policy. Use cases own orchestration and port definitions. Convert framework request data into application inputs at the entrypoint, and map application results to transport responses there. Keep ORM rows and framework request objects in adapters.
+Keep imports directed toward domain policy. The application imports the domain and owns use cases and ports. Adapters import those ports. Parse transport input at the entrypoint and map application results to transport responses there. Keep ORM rows and framework request objects in adapters.
 
-Verify domain and use-case tests without framework initialization. Inspect imports to confirm the domain and application cannot reach concrete adapters.
+Verify that domain and use-case tests run without framework initialization. Inspect their imports for dependencies on concrete adapters.
 
 Source: [Robert C. Martin's dependency rule](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html).
 
 ## Event-driven architecture
 
-Represent completed business facts as immutable event values. Distinguish local domain events, integration events, and event sourcing before implementing delivery. A domain event alone does not require a broker.
+Represent completed business facts as immutable event values. Choose local domain events, integration events, or event sourcing according to the requirement. Add a broker only when delivery needs one.
 
-For durable external delivery, commit state and pending events in the same database transaction. Deliver from an outbox with retry and a stable event ID. Make consumers idempotent at their persistence boundary. Define ordering per entity only when required, and version contracts consumed outside the module. Never claim exactly-once delivery from an ordinary publish call.
+For durable external delivery, commit state and pending events in the same transaction. Dispatch the outbox with retries and stable event IDs. Deduplicate consumed events at the consumer's persistence boundary. Define entity ordering when required, and version contracts consumed outside the module.
 
-The example records an atomic in-memory outbox. A deployed system needs a durable store, a dispatcher, and consumer deduplication. These are application work, not included infrastructure.
+The runnable example records an in-memory outbox. For durable delivery, implement persistent storage, dispatch, and consumer deduplication.
 
-Verify that failed commits produce neither state nor events. For a real dispatcher, retry delivery and confirm the consumer applies the effect once.
+Verify that a failed commit leaves both state and events unchanged. If dispatch is implemented, retry delivery and confirm the consumer applies the change once.
 
 Source: [Martin Fowler on event-driven patterns](https://martinfowler.com/articles/201701-event-driven.html).
 
 ## Domain-driven design
 
-Name modules after business capabilities. Define domain terms with the people who use the product. Keep aggregate invariants in domain functions and commit changes within one aggregate transaction. Model states with discriminated unions and derive persistence shapes at the adapter boundary.
+Name modules after business capabilities. Define terms with the people who use the product. Keep aggregate invariants in domain functions, and commit each aggregate change in one transaction. Model distinct states with discriminated unions.
 
-Use value objects when validation or identity needs them. Introduce bounded contexts when the same term has different meanings or responsibilities. Keep context contracts explicit. A CRUD feature can remain a small module without aggregates, repositories, or a shared domain package.
+Use value objects where validation or identity needs them. Define bounded contexts when a term has different meanings or responsibilities. Expose explicit contracts between contexts. Keep a CRUD feature small when it needs no richer domain model.
 
-Verify business rules with literal inputs and expected outcomes. Keep one context's internal entities out of another context's public contract.
+Verify business rules with literal inputs and expected outcomes. Check that context contracts expose no internal entity types.
 
 Source: [Eric Evans' DDD reference](https://www.domainlanguage.com/ddd/reference/).
 
 ## Functional core, imperative shell
 
-Make business decisions in pure functions that accept data and return results or events. Pass time, IDs, and prior state as inputs. Keep database access, environment reads, logging, and network effects in the surrounding application and adapters.
+Put business decisions in pure functions that accept data and return results or events. Supply time, IDs, and prior state as inputs. Keep persistence, environment reads, logging, and network effects in the surrounding application and adapters.
 
-When Effect is selected, use Effect for shell orchestration and keep deterministic decisions pure where useful. Run the Effect runtime at an entrypoint rather than inside domain functions.
+When Effect is selected, use it to orchestrate effects around pure decisions. Run the Effect runtime at an application entrypoint.
 
-Verify decisions without mocks. Verify observable persistence and error behavior through the shell.
+Verify decisions without mocks. Verify persistence and error behavior through the application entrypoint.
 
 Source: [Gary Bernhardt's functional core, imperative shell](https://www.destroyallsoftware.com/screencasts/catalog/functional-core-imperative-shell).

@@ -1,7 +1,13 @@
 # Set up React
 
-Read [React's standalone app guide](https://react.dev/learn/build-a-react-app-from-scratch) and [Vite's setup guide](https://vite.dev/guide/). Use `npm create vite@latest my-app -- --template react-ts` for a standalone React and TypeScript client.
+Read [React's standalone app guide](https://react.dev/learn/build-a-react-app-from-scratch) and [Vite's setup guide](https://vite.dev/guide/).
 
-Choose TanStack Start or Next.js instead when that is the selected frontend. This recipe creates a browser application. Database drivers and private SDKs need a separate backend entrypoint, or Convex functions when Convex is selected. Browser environment variables are public.
+## Set up the application
 
-Complete when the client renders, its production build succeeds, and a selected backend feature works through the actual client request path.
+Run `npm create vite@latest my-app -- --template react-ts` for a standalone React and TypeScript client. For a selected TanStack Start or Next.js application, use that framework's recipe instead.
+
+Keep database drivers and private SDKs in a backend, or in Convex functions when Convex is selected. Treat browser environment variables as public.
+
+## Verify
+
+Render the client and run its production build. If a backend is selected, exercise a requested feature through the real client request path.

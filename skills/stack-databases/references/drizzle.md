@@ -1,9 +1,17 @@
 # Set up Drizzle with PostgreSQL
 
-Read [Drizzle's PostgreSQL setup](https://orm.drizzle.team/docs/get-started/postgresql-new). This template's Drizzle recipe requires `postgres`. Verify the ORM and Drizzle Kit release channels together. The official guide may target a prerelease, so choose and record stable or prerelease explicitly.
+Read [Drizzle's PostgreSQL setup](https://orm.drizzle.team/docs/get-started/postgresql-new). This catalog's Drizzle recipe targets PostgreSQL.
 
-For the `pg` driver, install `drizzle-orm` and `pg` as runtime dependencies, and `drizzle-kit` and `@types/pg` as development dependencies. Add environment loading only if the runtime does not supply it. Put table definitions in the database adapter, migration output in `drizzle/`, and connection settings in `drizzle.config.ts`.
+## Configure the adapter and schema
 
-Use Drizzle's inferred select and insert types inside persistence code. Map rows into domain values at the adapter boundary. Generate versioned SQL with the installed `drizzle-kit generate`, inspect it, and apply it with the installed migration command. Keep one schema migration owner.
+Choose compatible ORM and Drizzle Kit releases. If the official example targets a prerelease, select and record the intended release channel.
 
-Complete when migrations apply to a fresh development database and a use case writes and reads through the Drizzle adapter. Verify a transaction rolls back both state and outbox writes on failure when events are selected.
+For the `pg` driver, install `drizzle-orm` and `pg` as runtime dependencies. Install `drizzle-kit` and `@types/pg` as development dependencies. Add environment loading if the runtime needs it.
+
+Keep table definitions in the database adapter, migration output in `drizzle/`, and connection configuration in `drizzle.config.ts`. Use inferred insert and select types inside persistence code. Map rows to domain values at the adapter boundary.
+
+Generate SQL with the installed `drizzle-kit generate`. Inspect the migration before applying it with the installed migration command. Keep one migration owner for the schema.
+
+## Verify
+
+Apply migrations to a fresh development database. Write and read through the application's Drizzle adapter. If durable events are selected, force a transaction failure and confirm both state and outbox writes roll back.

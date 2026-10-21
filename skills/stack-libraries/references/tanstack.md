@@ -1,13 +1,17 @@
 # Set up TanStack libraries
 
-Start at [TanStack](https://tanstack.com/) and select individual libraries based on the feature. Record that subset in the project's instructions. Check the framework adapter and version before installation. Packages use independent release versions.
+Choose the individual libraries needed by the feature from [TanStack](https://tanstack.com/). Record the subset in the project instructions. Check each library's version and framework adapter independently.
 
-For remote server state, read [Query for React](https://tanstack.com/query/latest/docs/framework/react/installation) or [Query for Svelte](https://tanstack.com/query/latest/docs/framework/svelte/installation). Install the corresponding `@tanstack/react-query` or `@tanstack/svelte-query`. Scope server-side caches per request, and implement query keys and mutation invalidation around real application resources.
+## Choose the integration
 
-For client routing in a standalone React app, read [Router's docs](https://tanstack.com/router/latest/docs/framework/react/overview) and follow the current installation guide linked there. TanStack Start already owns Router configuration. Keep Next.js and SvelteKit routing when those frameworks are selected.
+For remote server state, read [Query for React](https://tanstack.com/query/latest/docs/framework/react/installation) or [Query for Svelte](https://tanstack.com/query/latest/docs/framework/svelte/installation). Install `@tanstack/react-query` or `@tanstack/svelte-query`. Define resource query keys and mutation invalidation. Scope server-side caches per request.
 
-For forms, read [Form installation](https://tanstack.com/form/latest/docs/installation) and choose the framework adapter. For headless tables, read [Table installation](https://tanstack.com/table/latest/docs/installation) and confirm the selected major supports the target framework. Use that major's API and adapters.
+For routing in standalone React, follow [Router's documentation](https://tanstack.com/router/latest/docs/framework/react/overview). Keep the framework's existing router in TanStack Start, Next.js, and SvelteKit.
 
-For Convex, use its native reactive subscriptions unless the feature needs Query integration. If it does, follow Convex's maintained integration rather than duplicating the cache by hand.
+For forms, read [Form installation](https://tanstack.com/form/latest/docs/installation). For tables, read [Table installation](https://tanstack.com/table/latest/docs/installation). Install the adapter supported by the chosen framework and library major.
 
-Complete when every selected library is used by a real feature, the app builds, and its behavior works through the UI. For Query, verify that a mutation updates the visible data without a manual reload.
+With Convex, use native reactive subscriptions unless the feature needs Query integration. If it does, follow Convex's maintained integration.
+
+## Verify
+
+Run the application build and exercise each selected library through a requested feature. If a Query-backed feature includes a mutation, confirm the visible data updates without a manual reload.

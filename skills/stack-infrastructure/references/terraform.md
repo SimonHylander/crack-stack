@@ -1,9 +1,15 @@
 # Set up Terraform
 
-Read [HashiCorp's CLI installation guide](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli) and the selected provider's official getting started guide. Install the CLI using the method for the current operating system. Confirm with `terraform version`.
+Read [HashiCorp's CLI installation guide](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli) and the selected provider's getting started guide.
 
-Keep HCL in `infra/terraform/`. Declare Terraform and provider version constraints. Configure state and locking for the selected backend, with separate state per environment. Use provider credentials from the environment or credential chain. State can contain secrets, so keep local state and plans out of Git. Commit `.terraform.lock.hcl`.
+## Configure the project
 
-Run `terraform fmt -check`, `terraform init -backend=false`, and `terraform validate` for local verification. Run an environment-specific `terraform plan` when credentials and a backend are configured. Provision only the selected resources within the authorized deployment scope.
+Install the CLI for the operating system and confirm `terraform version`. Put HCL in `infra/terraform/`. Declare Terraform and provider version constraints.
 
-Complete when local validation passes and the intended environment's plan has been inspected. A successful plan does not verify that the application is deployed.
+Configure state and locking for the chosen backend. Supply credentials through the environment or provider credential chain. Keep state and saved plans out of Git because they can contain secrets. Commit `.terraform.lock.hcl`.
+
+## Verify
+
+Run `terraform fmt -check`, `terraform init -backend=false`, and `terraform validate` in the configuration directory.
+
+When credentials and the backend are available, initialize that backend and inspect an environment-specific `terraform plan`. Report local validation and plan results separately. After an authorized deployment, verify its outputs and the deployed feature.

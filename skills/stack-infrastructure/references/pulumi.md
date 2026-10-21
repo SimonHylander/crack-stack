@@ -1,9 +1,13 @@
 # Set up Pulumi
 
-Read [Pulumi's getting started guide](https://www.pulumi.com/docs/get-started/) and choose the cloud provider and TypeScript template. Install the CLI for the operating system and confirm with `pulumi version`.
+Read [Pulumi's getting started guide](https://www.pulumi.com/docs/get-started/) and choose the provider's TypeScript template.
 
-Initialize a project under `infra/pulumi/` with the selected provider's TypeScript template. Keep its package dependencies and lockfile local to that project or workspace. Select a state backend and a separate stack for each environment. Use Pulumi secret configuration for secrets and provider credential chains for access. Commit project and stack configuration only after checking that sensitive values are encrypted.
+## Configure the project
 
-Run the infrastructure TypeScript check and `pulumi preview` against the selected development stack. Keep resource ownership separate from any existing Terraform or SST project.
+Install the CLI for the operating system and confirm `pulumi version`. Initialize the provider template under `infra/pulumi/`. Declare dependencies in that project. Follow the repository's workspace and lockfile conventions.
 
-Complete when type checking passes and the preview contains only intended changes. Verify deployment outputs and the application's actual endpoint after an authorized deployment.
+Select the state backend and environment stack. Use provider credential chains for access and Pulumi secret configuration for secrets. Before committing stack configuration, confirm sensitive values are encrypted.
+
+## Verify
+
+Run the infrastructure TypeScript check. When credentials and state access are available, run `pulumi preview` for the development stack. Inspect the preview for unintended changes. After an authorized deployment, verify outputs and the application's endpoint.

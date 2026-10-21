@@ -1,18 +1,46 @@
 ---
 name: crack-stack
-description: Compose a new project or change a stack using Simon's preferred technologies and architecture recipes. Use when selecting a crack-stack combination or bootstrapping from this template.
+description: Select or change a crack-stack combination and bootstrap its application. Use for project setup that spans repository layout, architecture, or multiple technologies.
 ---
 
 # Compose a stack
 
-When working outside a template clone, use the [source repository](https://github.com/SimonHylander/crack-stack) for `catalog.json`, `stack.json`, and `scripts/stack.mjs`. Installed skill directories may omit these root files. Read category skills from this installed bundle or from that repository.
+Use `stack.json` as the project's selection. `catalog.json` defines the available IDs and dependencies.
 
-1. Read the application's requirements and the project's `stack.json`. For IDs, run `node scripts/stack.mjs --list`. Record explicit technology choices in `stack.json`. If a choice changes product behavior and the request leaves it open, ask the user. Leave unused categories empty.
-2. Run `node scripts/stack.mjs stack.json`. Resolve invalid combinations before installing. Read only the selected guides and the category skill that contains each guide. The printed paths are relative to the template root.
-3. Read the official setup pages linked by those guides. Check release channels, runtime constraints, and peer dependencies. For a new project, use `packageManager` from `stack.json` and replace the template's tooling lockfile if needed. For an existing application, preserve its lockfile's package manager and update the selection to match.
-4. If `monorepo` or `polyrepo` is selected, apply [the repository skill](../stack-repositories/SKILL.md) before scaffolding. Monorepos use Turborepo. Put the frontend in its application workspace or component repository. Scaffold the chosen frontend into a temporary directory using its official CLI. Inspect the generated files, then merge them into the destination without overwriting its instructions, selection, or unrelated work. Place runtime dependencies in the package that imports them. Commit the lockfile.
-5. Apply only selected architecture patterns. Use [stack-architecture](../stack-architecture/SKILL.md) for their shared module layout. Keep framework entrypoints where the framework expects them.
-6. Integrate selected storage and libraries, then infrastructure if selected. For multiple stores, record which data each owns and how projections update. For TanStack, record which individual libraries are needed in the project's instructions.
-7. Prove one feature works through its real entrypoint and selected persistence. Run the framework build, type checker, focused behavior tests, and each guide's completion check. Report missing credentials or unavailable services as unverified work.
+If this skill was installed without the template files, get `catalog.json`, `stack.json`, and `scripts/stack.mjs` from the [source repository](https://github.com/SimonHylander/crack-stack). Resolve printed guide paths from the template root, or find the corresponding recipe in the installed skills.
 
-Keep `stack.json` current when choices change. Replace template development configuration with the application's configuration where needed, and preserve the setup guidance for future agents. Record installed versions and actual verification commands in the application's README.
+## Confirm the selection
+
+1. Read the requested application and `stack.json`. Run `node scripts/stack.mjs --list` to find available choices.
+2. Record the requested choices. Leave unused categories empty. Ask about an unresolved choice only when it changes product behavior or deployment requirements.
+3. Run `node scripts/stack.mjs stack.json`. Resolve every validation error before installing dependencies.
+
+Continue when the selection matches the request and validation passes.
+
+## Read the selected recipes
+
+Use the CLI's guide paths to select the relevant skill. Read its entrypoint and only the recipes needed for this project.
+
+- For `monorepo` or `polyrepo`, read [repository setup](../stack-repositories/SKILL.md).
+- For architecture patterns, read [module structure](../stack-architecture/SKILL.md).
+- For a frontend, read [frontend setup](../stack-frontend/SKILL.md).
+- For storage or Drizzle, read [database setup](../stack-databases/SKILL.md).
+- For Effect, Confect, or TanStack, read [library setup](../stack-libraries/SKILL.md).
+- For infrastructure, read [infrastructure setup](../stack-infrastructure/SKILL.md).
+
+Before installation, read each recipe's official setup source. Check runtime requirements, release channels, and peer dependencies against the versions you will install.
+
+## Build the application
+
+1. Choose the package manager. For a new project, use `packageManager` from `stack.json`. For an existing application, preserve its lockfile's manager and update the selection to match.
+2. Apply the selected repository layout. For a new application, scaffold into a temporary directory, then inspect and merge the result. For an existing application, integrate into its current files. Preserve project instructions, selections, and unrelated work.
+3. Apply the selected architecture inside the framework's file conventions. Install runtime dependencies in the packages that import them.
+4. Integrate the selected libraries and stores. Add infrastructure only when selected. Follow each recipe's verification steps as its integration becomes runnable.
+
+Replace template tooling with application tooling where needed, including the lockfile if the package manager changes. Keep the setup skills available for later work.
+
+## Verify and hand over
+
+Run the application's build, type checker, and focused behavior tests. Exercise one requested feature through its real entrypoint. If persistence is selected, include a write and read through the actual adapter.
+
+Report each selected integration as verified or unverified, with the command or observed result. Identify any missing credentials or unavailable services. Keep `stack.json` current and record the application's verification commands in its README.

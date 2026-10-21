@@ -1,14 +1,14 @@
 ---
 name: stack-libraries
-description: Install and integrate Effect, Confect, or selected TanStack libraries. Use for crack-stack library setup and compatibility checks.
+description: Set up Effect, Confect, or individual TanStack libraries. Use when installing these libraries or checking their integration requirements.
 ---
 
 # Set up libraries
 
-Read only the selected library's recipe. Verify runtime requirements and peer dependencies before resolving versions. Keep one lockfile for the chosen package manager.
+Read the recipe for each selected library:
 
-- Read [Effect](references/effect.md) for Effect v4 and the upstream agent skill.
-- Read [Confect](references/confect.md) for Effect integrated with Convex.
-- Read [TanStack](references/tanstack.md) to choose individual libraries and framework adapters.
+- For `effect`, read [Effect v4 and upstream agent guidance](references/effect.md).
+- For `confect`, read [Confect with Effect and Convex](references/confect.md).
+- For `tanstack`, read [individual libraries and framework adapters](references/tanstack.md).
 
-Confect also requires the Effect and Convex recipes. TanStack is a family of independent packages. Install only the components that the feature needs.
+Install the packages needed by the requested feature. For each integration, verify that the chosen versions satisfy its runtime requirements and peer dependencies.

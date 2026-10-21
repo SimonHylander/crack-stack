@@ -1,9 +1,13 @@
 # Set up SST
 
-Read [SST's documentation](https://sst.dev/docs/) and its guide for the selected framework. Verify the current major, provider support, runtime, and framework deployment component before initializing. Use the current CLI installation and initialization steps in that guide.
+Read [SST's documentation](https://sst.dev/docs/) and the selected framework's deployment guide. Check the current major, provider support, and runtime requirements.
 
-Keep `sst.config.ts` at the location required by SST. Use named stages to separate environments. Define resources with the selected major's components and link them to application code using its documented mechanism. Use SST secrets or the provider's secret store. Check which resources and state SST owns before integrating with existing infrastructure.
+## Configure the project
 
-SST manages infrastructure using its own conventions. Do not add a second Pulumi project for the same resources. Check the current CLI's supported diff or preview workflow before deployment. SST development commands may create cloud resources, so include them in the deployment scope.
+Follow the guide's CLI installation and initialization steps. Keep `sst.config.ts` where the CLI expects it. Define resources with that major's components and link them to application code through the documented mechanism.
 
-Complete when configuration type checking passes and the selected framework's build succeeds. After an authorized development deployment, verify the actual route and a selected storage operation through its deployed endpoint.
+Use named stages for environments. Store secrets in SST or the provider's secret store. Account for resources created by SST development commands when defining deployment scope.
+
+## Verify
+
+Type-check the configuration and build the selected framework. Use the installed CLI's supported diff or preview workflow before deployment. After an authorized development deployment, exercise the deployed route and any selected storage operation.

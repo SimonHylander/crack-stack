@@ -1,7 +1,15 @@
 # Set up Next.js
 
-Read the [official installation guide](https://nextjs.org/docs/app/getting-started/installation). For a new app, start with `npx create-next-app@latest my-app` and select TypeScript and the App Router. Enable other generator options only when the project requests them.
+Read the [official installation guide](https://nextjs.org/docs/app/getting-started/installation).
 
-Keep framework files in `app/` or `src/app/`. Server Actions and Route Handlers validate input and call application use cases. Mark database modules as server-only. Introduce client components only where browser APIs or interaction require them. Keep Next.js routing, and use TanStack Query for client server-state requirements rather than introducing a second router.
+## Set up the application
 
-Complete when a page renders, a server entrypoint executes a use case, and the production build succeeds. Verify that no server secrets enter the client bundle.
+Run `npx create-next-app@latest my-app`. Select TypeScript and the App Router. Enable other options when the project requests them.
+
+Keep framework files in `app/` or `src/app/`. Parse Server Action and Route Handler inputs before calling use cases. Mark database modules as server-only. Use client components where interaction or browser APIs require them.
+
+Keep Next.js routing. Add TanStack Query when the feature needs client-side server-state management.
+
+## Verify
+
+Render a page and run the production build. If a server entrypoint is implemented, exercise it through the application. Check that private credentials and database modules stay out of the client bundle.

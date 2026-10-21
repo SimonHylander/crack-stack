@@ -1,16 +1,20 @@
 ---
 name: stack-databases
-description: Set up PostgreSQL, Convex, Neo4j, Pinecone, or Drizzle ORM. Use when installing or integrating a selected crack-stack data store.
+description: Set up PostgreSQL, Convex, Neo4j, Pinecone, or Drizzle for PostgreSQL. Use when adding or integrating selected persistence.
 ---
 
-# Set up databases
+# Set up persistence
 
-Read only the selected store's recipe. Keep credentials and database clients on the server. Record which store owns each entity when more than one is selected.
+Read the recipe for each selected store or ORM:
 
-- Read [PostgreSQL](references/postgres.md) for relational persistence.
-- Read [Convex](references/convex.md) for Convex schema, functions, and reactive clients.
-- Read [Neo4j](references/neo4j.md) for graph persistence.
-- Read [Pinecone](references/pinecone.md) for a vector index and its synchronization contract.
-- Read [Drizzle](references/drizzle.md) for PostgreSQL schema and migrations.
+- For `postgres`, read [PostgreSQL setup](references/postgres.md).
+- For `convex`, read [Convex setup](references/convex.md).
+- For `neo4j`, read [Neo4j setup](references/neo4j.md).
+- For `pinecone`, read [Pinecone setup](references/pinecone.md).
+- For `drizzle`, read [Drizzle with PostgreSQL setup](references/drizzle.md).
 
-Use transactions for invariants within a store. For projections across stores, define asynchronous updates, retries, and recovery. Keep schema changes and generated migrations in version control. Run each selected recipe's integration check before reporting storage complete.
+Keep private credentials and direct database clients on the server. Document environment variable names in `.env.example`.
+
+When several stores are selected, record which store owns each entity. Define how projections update, retry, and recover across stores. Keep transactions within the store that owns the invariant.
+
+Keep schema changes and migrations in version control. Verify each selected adapter against its development service using the recipe's checks.

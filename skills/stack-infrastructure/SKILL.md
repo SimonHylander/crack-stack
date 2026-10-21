@@ -1,16 +1,18 @@
 ---
 name: stack-infrastructure
-description: Set up Terraform, Pulumi, or SST for a selected crack-stack deployment. Use for infrastructure initialization, configuration, and deployment planning.
+description: Set up Terraform, Pulumi, or SST. Use when initializing infrastructure or preparing a deployment for the selected stack.
 ---
 
 # Set up infrastructure
 
-Choose one owner for each resource. A project can integrate with resources managed elsewhere, but two tools must not manage the same resource.
+Read the recipe for the selected tool:
 
-- Read [Terraform](references/terraform.md) for HCL infrastructure.
-- Read [Pulumi](references/pulumi.md) for TypeScript infrastructure.
-- Read [SST](references/sst.md) for SST application infrastructure and framework deployment.
+- For `terraform`, read [Terraform setup](references/terraform.md).
+- For `pulumi`, read [Pulumi setup](references/pulumi.md).
+- For `sst`, read [SST setup](references/sst.md).
 
-Record the provider, region, environment, state backend, and resource owner before provisioning. Keep infrastructure code under `infra/` unless the tool requires a root configuration. Use separate development and production state. Keep resource creation and deployment within the user's authorized scope. Generating code or a plan does not itself authorize cloud deployment.
+Assign one tool and repository to each managed resource. Before provisioning, record the provider, region, environment, and state backend. Keep development and production state separate.
 
-Complete the selected guide's local validation, and report preview or deployment work that could not run because of credentials.
+Put infrastructure under `infra/` unless the tool requires a root configuration. Run deployments within the task's authorized scope. A setup or planning request alone does not authorize cloud deployment.
+
+Report local validation, preview, and deployment results separately. State which stages could not run and why.

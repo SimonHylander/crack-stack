@@ -1,9 +1,15 @@
 # Set up PostgreSQL
 
-Read [PostgreSQL's installation guide](https://www.postgresql.org/docs/current/tutorial-install.html). Choose a supported server release and record whether development uses a local installation, container, or hosted database. Use a named persistent volume for a local container.
+Read [PostgreSQL's installation guide](https://www.postgresql.org/docs/current/tutorial-install.html).
 
-Set a server-only `DATABASE_URL` and put its variable name in `.env.example`. Configure TLS according to the provider. Use one connection pool per server process, or a host-compatible driver for short-lived and edge runtimes. Create and close pools at the composition boundary.
+## Configure the server and client
 
-If Drizzle is selected, follow [its recipe](drizzle.md). Otherwise choose a driver from PostgreSQL's supported client ecosystem and keep SQL in a persistence adapter. Use parameterized queries. Commit aggregate state and outbox rows in one transaction when durable events are selected.
+Choose a supported release. Record whether development uses a local installation, container, or hosted database. For a container, use a named persistent volume.
 
-Complete when the application connects, applies its schema, writes a record, and reads it back through the actual adapter. Verify rollback for a failed multi-write transaction.
+Configure a server-only `DATABASE_URL` and the provider's required TLS settings. Use one connection pool per server process. For short-lived or edge runtimes, choose a compatible driver and connection strategy. Acquire and close connections at the application lifecycle boundary.
+
+If Drizzle is selected, follow [Drizzle setup](drizzle.md). Otherwise, keep parameterized SQL in a persistence adapter. For durable events, commit aggregate state and outbox rows in one transaction.
+
+## Verify
+
+Apply the schema to a development database. Write a record and read it through the actual adapter. If the feature uses a multi-write transaction, force a failure and verify rollback.
