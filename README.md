@@ -4,10 +4,10 @@ Preferred technologies, setup skills, and architecture boilerplate for coding ag
 
 ## Create a project
 
-Install the CLI dependencies once with `npm ci`. Then run:
+Install the CLI dependencies once with `pnpm install --frozen-lockfile`. Then run:
 
 ```sh
-npm run create
+pnpm run create
 ```
 
 Choose a project directory, describe the application, and pick a preset or a custom stack. Choose Clerk, WorkOS AuthKit, or no auth. The CLI includes required technologies automatically and shows the final selection before creating the folder.
@@ -23,10 +23,10 @@ The agent uses the brief to scaffold the chosen frameworks and implement the app
 For a scripted setup, supply the same choices directly:
 
 ```sh
-npm run create -- my-app --recipe react-convex --description "A shared notes app"
+pnpm run create my-app --recipe react-convex --description "A shared notes app"
 ```
 
-Run `npm run create -- --help` for the custom choice and package-manager options. `npm run stack` opens the same interactive flow. Existing selections can still be inspected with `node scripts/stack.mjs stack.json`.
+Run `pnpm run create --help` for the custom choice and package-manager options. `pnpm run stack` opens the same interactive flow. Existing selections can still be inspected with `node scripts/stack.mjs stack.json`.
 
 ## Available choices
 
@@ -65,9 +65,9 @@ Its instructions remain upstream so they can follow the installed Effect package
 [The task example](examples/architecture/README.md) has a pure domain function, an application port, an in-memory adapter, and an atomic in-memory outbox. It runs without application libraries or external services.
 
 ```sh
-npm ci
-npm run check
-npm run example -- "Build my next app"
+pnpm install --frozen-lockfile
+pnpm run check
+pnpm run example "Build my next app"
 ```
 
-`npm run check` validates local guide links, the example stack selections, TypeScript, and behavior tests. It does not provision or test hosted databases and infrastructure.
+`pnpm run check` validates local guide links, the example stack selections, TypeScript, and behavior tests. It does not provision or test hosted databases and infrastructure.

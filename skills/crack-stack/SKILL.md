@@ -11,7 +11,7 @@ If this skill was installed without the template tooling, use a template checkou
 
 ## Confirm the selection
 
-1. Read the requested application and `stack.json`. Use `node scripts/stack.mjs --list` to find available choices. The user-facing setup wizard is `npm run create`.
+1. Read the requested application and `stack.json`. Use `node scripts/stack.mjs --list` to find available choices. The user-facing setup wizard is `pnpm run create`.
 2. Record the requested choices. Leave unused categories empty. Ask about an unresolved choice only when it changes product behavior or deployment requirements.
 3. Run `node scripts/stack.mjs stack.json`. Resolve every validation error before installing dependencies.
 

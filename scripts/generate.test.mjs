@@ -23,9 +23,10 @@ test('generates a standalone project with the request, chosen guides, and requir
     assert.ok(brief.includes('skills/stack-libraries/references/confect.md'));
     assert.ok(!brief.includes('PostgreSQL'));
     const manifest = JSON.parse(await readFile(join(target, 'package.json'), 'utf8'));
-    const lock = JSON.parse(await readFile(join(target, 'package-lock.json'), 'utf8'));
+    const lock = await readFile(join(target, 'pnpm-lock.yaml'), 'utf8');
     assert.equal(manifest.name, 'notes');
-    assert.equal(lock.packages[''].name, 'notes');
+    assert.match(lock, /^lockfileVersion: '9.0'/);
+    await assert.rejects(access(join(target, 'package-lock.json')), { code: 'ENOENT' });
     const check = execFileSync(process.execPath, ['scripts/check.mjs'], { cwd: target, encoding: 'utf8' });
     assert.equal(check, 'Local links, catalog guides, and stack selections are valid.\n');
     const repeated = spawnSync(process.execPath, [cli, target, '--recipe', 'react-convex', '--description', 'Changed request'], { encoding: 'utf8' });
@@ -43,6 +44,8 @@ test('creates a preset project and rejects incomplete or conflicting requests be
     const target = join(temporary, 'react-notes');
     execFileSync(process.execPath, [cli, target, '--recipe', 'react-convex', '--description', 'Shared notes']);
     const selection = JSON.parse(await readFile(join(target, 'stack.json'), 'utf8'));
+    assert.equal(selection.packageManager, 'pnpm');
+    await access(join(target, 'pnpm-lock.yaml'));
     assert.deepEqual(selection.choices, ['polyrepo', 'functional-core', 'react', 'convex', 'effect', 'confect']);
     for (const args of [
       ['--choices', 'clerk,workos', '--description', 'Conflicting auth providers'],

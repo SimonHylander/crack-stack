@@ -31,12 +31,11 @@ export async function generateProject({ directory, selection }) {
       await cp(resolve(templateRoot, entry), resolve(target, entry), { recursive: true });
     }
     const manifest = JSON.parse(await readFile(resolve(templateRoot, 'package.json'), 'utf8'));
-    const lock = JSON.parse(await readFile(resolve(templateRoot, 'package-lock.json'), 'utf8'));
     manifest.name = completed.name;
-    lock.name = completed.name;
-    lock.packages[''].name = completed.name;
     await writeFile(resolve(target, 'package.json'), JSON.stringify(manifest, null, 2) + '\n');
-    await writeFile(resolve(target, 'package-lock.json'), JSON.stringify(lock, null, 2) + '\n');
+    if (completed.packageManager === 'pnpm') {
+      await cp(resolve(templateRoot, 'pnpm-lock.yaml'), resolve(target, 'pnpm-lock.yaml'));
+    }
     await writeFile(resolve(target, 'stack.json'), JSON.stringify(completed, null, 2) + '\n');
     await writeFile(resolve(target, 'GENERATE.md'), `# Generate ${completed.name}\n\n${completed.description.trim()}\n\n## Selected stack\n\n${renderSelection(completed).split('\n').slice(2).join('\n')}\n## Implementation\n\nFollow [the composition skill](skills/crack-stack/SKILL.md). Treat the selection above as the agreed stack. Build the requested application in this directory and exercise a working feature through its real entrypoint.\n\nRead only the selected recipes and their official sources. Resolve runtime and peer dependency compatibility before installation. Replace template tooling with the application's tooling where needed. Preserve this brief, stack.json, and the setup skills.\n\nRun the application's build, type checker, and applicable integration checks. Report what was verified and any integration blocked by credentials or unavailable services.\n`);
     await writeFile(resolve(target, 'AGENTS.md'), '# Build this project\n\nRead [GENERATE.md](GENERATE.md) for the application requirements and selected stack. Follow [the composition skill](skills/crack-stack/SKILL.md) to implement it.\n\nKeep stack.json current. Preserve explicit choices and read only the recipes needed for them.\n');

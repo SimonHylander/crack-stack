@@ -13,18 +13,18 @@ const recipes = [
   { value: 'svelte-postgres', label: 'Svelte + PostgreSQL', hint: 'Drizzle, TanStack, Pulumi' },
 ];
 const authProviders = Object.entries(catalog).filter(([, entry]) => entry.category === 'auth');
-const managers = ['npm', 'pnpm', 'yarn', 'bun'];
+const managers = ['pnpm', 'npm', 'yarn', 'bun'];
 const help = `Usage:
-  npm run create                         Choose a stack interactively
-  npm run create -- my-app               Choose a stack for my-app
-  npm run create -- my-app --recipe react-convex --description "A shared notes app"
+  pnpm run create                        Choose a stack interactively
+  pnpm run create my-app                 Choose a stack for my-app
+  pnpm run create my-app --recipe react-convex --description "A shared notes app"
 
 Options:
   --recipe <name>          tanstack-postgres, react-convex, svelte-postgres
   --choices <ids>          Comma-separated technology IDs instead of a recipe
   --auth <id>             clerk, workos, none (overrides auth in --choices)
   --description <text>    What the application should do
-  --package-manager <id>  npm, pnpm, yarn, bun (default: npm)
+  --package-manager <id>  npm, pnpm, yarn, bun (default: pnpm)
   --help                  Show this help
 `;
 
@@ -47,7 +47,7 @@ function directoryError(value) {
 
 function selectionError(choices) {
   try {
-    resolveSelection({ name: 'my-app', packageManager: 'npm', choices });
+    resolveSelection({ name: 'my-app', packageManager: 'pnpm', choices });
   } catch (error) {
     return error.message;
   }
@@ -137,7 +137,7 @@ export async function createCommand(args = []) {
   const result = await generateProject({
     directory: positionals[0],
     selection: {
-      name: basename(resolve(positionals[0])), packageManager: values['package-manager'] ?? 'npm',
+      name: basename(resolve(positionals[0])), packageManager: values['package-manager'] ?? 'pnpm',
       description: values.description ?? '', choices: values.auth === undefined ? choices : withAuth(choices, values.auth),
     },
   });
