@@ -118,6 +118,12 @@
       "convex"
     ]
   },
+  "vercel": {
+    "name": "Vercel",
+    "category": "infrastructure",
+    "guide": "skills/stack-infrastructure/references/vercel.md",
+    "requires": []
+  },
   "terraform": {
     "name": "Terraform",
     "category": "infrastructure",
