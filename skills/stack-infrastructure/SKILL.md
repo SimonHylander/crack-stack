@@ -1,12 +1,13 @@
 ---
 name: stack-infrastructure
-description: Set up Terraform, Pulumi, or SST. Use when initializing infrastructure or preparing a deployment for the selected stack.
+description: Set up Vercel, Terraform, Pulumi, or SST. Use when initializing infrastructure or preparing a deployment for the selected stack.
 ---
 
 # Set up infrastructure
 
-Read the recipe for the selected tool:
+Read the recipe for the selected tool. When no tool is selected, default to Vercel if the app runs on a framework Vercel supports.
 
+- For `vercel`, read [Vercel setup](references/vercel.md).
 - For `terraform`, read [Terraform setup](references/terraform.md).
 - For `pulumi`, read [Pulumi setup](references/pulumi.md).
 - For `sst`, read [SST setup](references/sst.md).
