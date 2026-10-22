@@ -11,7 +11,8 @@ async function markdownFiles(directory) {
     if (['.git', 'node_modules'].includes(entry.name)) continue;
     const path = resolve(directory, entry.name);
     if (entry.isDirectory()) files.push(...await markdownFiles(path));
-    else if (entry.name.endsWith('.md')) files.push(path);
+    // Symlinked files are checked at their real path, where their relative links resolve.
+    else if (entry.isFile() && entry.name.endsWith('.md')) files.push(path);
   }
   return files;
 }

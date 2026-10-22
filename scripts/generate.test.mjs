@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { execFileSync, spawnSync } from 'node:child_process';
-import { mkdtemp, readFile, rm, access } from 'node:fs/promises';
+import { mkdtemp, readFile, readlink, rm, access } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 
@@ -23,6 +23,11 @@ test('generates a standalone project with the request, chosen guides, and requir
     assert.ok(brief.includes('skills/stack-libraries/references/confect.md'));
     assert.ok(!brief.includes('PostgreSQL'));
     for (const directory of ['docs', 'research']) await access(join(target, directory, 'README.md'));
+    for (const directory of ['skills', 'agents', 'tasks', 'knowledge']) await access(join(target, '.agents', directory));
+    assert.deepEqual(JSON.parse(await readFile(join(target, '.agents', 'mcp.json'), 'utf8')), { mcpServers: {} });
+    assert.equal(await readlink(join(target, '.agents', 'agents.md')), '../AGENTS.md');
+    for (const link of ['.claude', '.codex']) assert.equal(await readlink(join(target, link)), '.agents');
+    assert.equal(await readlink(join(target, 'CLAUDE.md')), 'AGENTS.md');
     const manifest = JSON.parse(await readFile(join(target, 'package.json'), 'utf8'));
     const lock = await readFile(join(target, 'pnpm-lock.yaml'), 'utf8');
     assert.equal(manifest.name, 'notes');
