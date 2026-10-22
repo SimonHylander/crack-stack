@@ -61,12 +61,14 @@ export async function generateProject({ directory, selection }) {
       await mkdir(resolve(target, directory));
       await writeFile(resolve(target, directory, 'README.md'), readme);
     }
-    await writeFile(resolve(target, 'AGENTS.md'), '# Build this project\n\nRead [GENERATE.md](GENERATE.md) for the application requirements and selected stack. Follow [the composition skill](skills/crack-stack/SKILL.md) to implement it.\n\nKeep stack.json current. Preserve explicit choices and read only the recipes needed for them.\n\nWrite project documentation to [docs/](docs/README.md) and investigation findings to [research/](research/README.md).\n');
-    // .agents holds agent definitions and skills. Claude Code and Codex read them through their own directory names.
-    for (const directory of ['agents', 'skills']) {
+    await writeFile(resolve(target, 'AGENTS.md'), '# Build this project\n\nRead [GENERATE.md](GENERATE.md) for the application requirements and selected stack. Follow [the composition skill](skills/crack-stack/SKILL.md) to implement it.\n\nKeep stack.json current. Preserve explicit choices and read only the recipes needed for them.\n\nWrite project documentation to [docs/](docs/README.md) and investigation findings to [research/](research/README.md).\n\nAgent configuration follows the [.agents protocol](https://dotagentsprotocol.com) in `.agents/`. `.claude`, `.codex`, and `.agents/agents.md` link back to it and to this file.\n');
+    // Workspace layer of the .agents protocol (https://dotagentsprotocol.com). Claude Code and Codex read it through .claude and .codex.
+    for (const directory of ['skills', 'agents', 'tasks', 'knowledge']) {
       await mkdir(resolve(target, '.agents', directory), { recursive: true });
       await writeFile(resolve(target, '.agents', directory, '.gitkeep'), '');
     }
+    await writeFile(resolve(target, '.agents', 'mcp.json'), JSON.stringify({ mcpServers: {} }, null, 2) + '\n');
+    await symlink('../AGENTS.md', resolve(target, '.agents', 'agents.md'));
     for (const link of ['.claude', '.codex']) await symlink('.agents', resolve(target, link));
     await symlink('AGENTS.md', resolve(target, 'CLAUDE.md'));
     await writeFile(resolve(target, 'README.md'), `# ${completed.name}\n\n${completed.description.trim()}\n\nOpen this directory with your coding agent and ask it to build from [GENERATE.md](GENERATE.md). The brief contains the selected stack and links to its setup instructions.\n`);
