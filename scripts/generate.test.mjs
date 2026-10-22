@@ -22,6 +22,7 @@ test('generates a standalone project with the request, chosen guides, and requir
     assert.ok(brief.includes('Monorepo with Turborepo'));
     assert.ok(brief.includes('skills/stack-libraries/references/confect.md'));
     assert.ok(!brief.includes('PostgreSQL'));
+    for (const directory of ['docs', 'research']) await access(join(target, directory, 'README.md'));
     const manifest = JSON.parse(await readFile(join(target, 'package.json'), 'utf8'));
     const lock = await readFile(join(target, 'pnpm-lock.yaml'), 'utf8');
     assert.equal(manifest.name, 'notes');

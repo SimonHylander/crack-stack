@@ -6,6 +6,12 @@ import { catalog, renderSelection, validateSelection } from './selection.mjs';
 
 const templateRoot = fileURLToPath(new URL('..', import.meta.url));
 
+// Directories every generated project starts with, keyed to the README that defines each one.
+const projectDirectories = {
+  docs: '# Docs\n\nDocumentation for this project: architecture, decisions, specs, and guides. Keep it current with the code it describes.\n',
+  research: '# Research\n\nFindings from investigations, one Markdown file per question. Cite the primary source for each claim and date the file.\n',
+};
+
 export function resolveSelection(selection) {
   if (!Array.isArray(selection?.choices)) return validateSelection(selection);
   const choices = new Set(selection.choices);
@@ -51,7 +57,11 @@ export async function generateProject({ directory, selection }) {
     }
     await writeFile(resolve(target, 'stack.json'), JSON.stringify(completed, null, 2) + '\n');
     await writeFile(resolve(target, 'GENERATE.md'), `# Generate ${completed.name}\n\n${completed.description.trim()}\n\n## Selected stack\n\n${renderSelection(completed).split('\n').slice(2).join('\n')}\n## Implementation\n\nFollow [the composition skill](skills/crack-stack/SKILL.md). Treat the selection above as the agreed stack. Build the requested application in this directory and exercise a working feature through its real entrypoint.\n\nRead only the selected recipes and their official sources. Resolve runtime and peer dependency compatibility before installation. Replace template tooling with the application's tooling where needed. Preserve this brief, stack.json, and the setup skills.\n\nRun the application's build, type checker, and applicable integration checks. Report what was verified and any integration blocked by credentials or unavailable services.\n`);
-    await writeFile(resolve(target, 'AGENTS.md'), '# Build this project\n\nRead [GENERATE.md](GENERATE.md) for the application requirements and selected stack. Follow [the composition skill](skills/crack-stack/SKILL.md) to implement it.\n\nKeep stack.json current. Preserve explicit choices and read only the recipes needed for them.\n');
+    for (const [directory, readme] of Object.entries(projectDirectories)) {
+      await mkdir(resolve(target, directory));
+      await writeFile(resolve(target, directory, 'README.md'), readme);
+    }
+    await writeFile(resolve(target, 'AGENTS.md'), '# Build this project\n\nRead [GENERATE.md](GENERATE.md) for the application requirements and selected stack. Follow [the composition skill](skills/crack-stack/SKILL.md) to implement it.\n\nKeep stack.json current. Preserve explicit choices and read only the recipes needed for them.\n\nWrite project documentation to [docs/](docs/README.md) and investigation findings to [research/](research/README.md).\n');
     await writeFile(resolve(target, 'README.md'), `# ${completed.name}\n\n${completed.description.trim()}\n\nOpen this directory with your coding agent and ask it to build from [GENERATE.md](GENERATE.md). The brief contains the selected stack and links to its setup instructions.\n`);
     return { directory: target, selection: completed };
   } catch (error) {
