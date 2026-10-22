@@ -1,6 +1,6 @@
 {
   "name": "crack-stack",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Choose a technology stack and generate setup skills and an application brief.",
   "bin": {
     "crack-stack": "scripts/create.mjs"
