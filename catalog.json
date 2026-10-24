@@ -142,6 +142,12 @@
     "guide": "skills/stack-infrastructure/references/sst.md",
     "requires": []
   },
+  "alchemy": {
+    "name": "Alchemy",
+    "category": "infrastructure",
+    "guide": "skills/stack-infrastructure/references/alchemy.md",
+    "requires": []
+  },
   "clerk": {
     "name": "Clerk",
     "category": "auth",
