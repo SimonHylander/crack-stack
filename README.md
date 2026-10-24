@@ -34,7 +34,7 @@ Run `npx crack-stack --help` for the custom choice and package-manager options. 
 - **A1 Architecture:** Hexagonal, Clean, Event-driven, Domain-driven design, Functional core with an imperative shell.
 - **D1 Data:** PostgreSQL, Convex, Neo4j, Pinecone, and Drizzle ORM for PostgreSQL.
 - **AU1 Authentication:** Clerk or WorkOS AuthKit.
-- **I1 Infrastructure:** Vercel, Terraform, Pulumi, or SST.
+- **I1 Infrastructure:** Vercel, Terraform, Pulumi, SST, or Alchemy.
 - **L1 Libraries:** [TanStack](https://tanstack.com/), [Effect v4](https://effect.website/docs/v4/onboarding), and [Confect](https://confect.dev/getting-started/introduction).
 - **F1 Frontend:** TanStack Start, Next.js, React with Vite, or Svelte. The Svelte recipe offers SvelteKit for full-stack apps and Vite for a standalone UI.
 
